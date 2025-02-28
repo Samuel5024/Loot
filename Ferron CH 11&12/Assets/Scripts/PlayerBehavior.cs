@@ -78,6 +78,7 @@ public class PlayerBehavior : MonoBehaviour
             //passing the Vector3 and ForceMode parameters to RigidBody.AddForce() makes the player jump
             _rb.AddForce(Vector3.up * jumpVelocity, ForceMode.Impulse);
             jump = false;
+            playerJump(); //called after force is applied in Update()
         }
 
         //Vector3 stores left and right rotation
@@ -115,8 +116,6 @@ public class PlayerBehavior : MonoBehaviour
             //velocity keeps our bullets in a straigh-ish line
             bulletRB.velocity = this.transform.forward.normalized * bulletSpeed;
         }
-
-        playerJump(); //called after force is applied in Update()
     }
 
     private bool IsGrounded()
