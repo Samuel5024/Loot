@@ -33,6 +33,9 @@ public class PlayerBehavior : MonoBehaviour
     private bool jump = false; 
     private bool shoot = false;
     private GameBehavior _gameManager;
+
+    public delegate void JumpingEvent();
+    public event JumpingEvent playerJump; //event of the JumpingEvent type that mathces the delegate's signature
     void Start()
     {
         //checks if Rigidbody exists on the GameObject the script is attached to
@@ -112,6 +115,8 @@ public class PlayerBehavior : MonoBehaviour
             //velocity keeps our bullets in a straigh-ish line
             bulletRB.velocity = this.transform.forward.normalized * bulletSpeed;
         }
+
+        playerJump(); //called after force is applied in Update()
     }
 
     private bool IsGrounded()
